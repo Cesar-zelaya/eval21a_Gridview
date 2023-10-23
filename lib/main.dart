@@ -38,27 +38,27 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(widget.title),
       ),
-      body: MyGridView(
-        
-      ),
+      body: MyGridView(),
     );
   }
 }
 
 class MyGridView extends StatelessWidget {
+  final List<String> itemTexts = List.generate(6, (index) => 'Elemento de fuego $index');
+
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
       ),
-      itemCount: 6,
+      itemCount: itemTexts.length,
       itemBuilder: (context, index) {
         return Card(
           elevation: 5,
           margin: EdgeInsets.all(10),
           child: Center(
-            child: Text('Item $index'),
+            child: Text(itemTexts[index]),
           ),
         );
       },
