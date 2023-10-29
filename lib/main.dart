@@ -44,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class MyGridView extends StatelessWidget {
-  final List<String> itemTexts = List.generate(6, (index) => 'Elemento de fuego $index');
+  final List<String> itemTexts = List.generate(6, (index) => 'Un GridView $index');
 
   @override
   Widget build(BuildContext context) {
