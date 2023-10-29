@@ -43,8 +43,23 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
+class MyItem {
+  final String text;
+  final Color color;
+  final String? imageUrl; // Opcionalmente, puedes agregar una URL de imagen.
+
+  MyItem(this.text, this.color, {this.imageUrl});
+}
+
 class MyGridView extends StatelessWidget {
-  final List<String> itemTexts = List.generate(6, (index) => 'Un GridView $index');
+  final List<MyItem> items = [
+    MyItem('Item 1', Colors.red),
+    MyItem('Item 2', Colors.blue, imageUrl: 'images/fuego.png'),
+    MyItem('Item 3', Colors.green, imageUrl: 'URL_DE_LA_IMAGEN'),
+    MyItem('Item 5', Colors.orange, imageUrl: 'URL_DE_LA_IMAGEN'),
+    MyItem('Item 4', Colors.yellow),
+    MyItem('Item 6', Colors.purple),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -52,15 +67,29 @@ class MyGridView extends StatelessWidget {
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
       ),
-      itemCount: itemTexts.length,
+      itemCount: items.length,
       itemBuilder: (context, index) {
-        return Card(
-          elevation: 5,
-          margin: EdgeInsets.all(10),
-          child: Center(
-            child: Text(itemTexts[index]),
-          ),
-        );
+        if (items[index].imageUrl != null) {
+          // Si hay una URL de imagen, muestra la imagen.
+          return Card(
+            elevation: 5,
+            margin: EdgeInsets.all(10),
+            child: Image.network(
+              items[index].imageUrl!,
+              fit: BoxFit.cover,
+            ),
+          );
+        } else {
+          // Si no hay URL de imagen, muestra el texto.
+          return Card(
+            elevation: 5,
+            margin: EdgeInsets.all(10),
+            color: items[index].color,
+            child: Center(
+              child: Text(items[index].text),
+            ),
+          );
+        }
       },
     );
   }
